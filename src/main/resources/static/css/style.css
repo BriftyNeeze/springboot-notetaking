@@ -1,0 +1,5 @@
+textarea.writing {
+    field-sizing: content;
+    resize: none;
+    min-height: 80vh;
+}

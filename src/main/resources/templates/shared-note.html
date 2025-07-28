@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>View</title>
+</head>
+<body layout:fragment="body">
+<section>
+    <div class="container">
+
+        <div class="col-6">
+            <label for="title" class="form-label h3">Title</label>
+            <input
+                    readonly
+                    type="text"
+                    class="form-control"
+                    th:field="${note.title}"
+                    id="title"
+                    placeholder="Title">
+        </div>
+
+        <div class="col-12">
+            <label for="content" class="form-label h3">Content</label>
+            <textarea
+                    readonly
+                    type="text"
+                    rows="10"
+                    class="form-control writing"
+                    th:field="${note.content}"
+                    id="content">
+                </textarea>
+        </div>
+<!--        test purposes-->
+<!--        <div th:if="${noteShare.getPermissionString() == 'READ'}">-->
+<!--            <div>Read only</div>-->
+<!--        </div>-->
+
+    </div>
+</section>
+</body>
+</html>

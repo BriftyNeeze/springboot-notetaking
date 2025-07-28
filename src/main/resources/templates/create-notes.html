@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Register</title>
+</head>
+<body layout:fragment="body">
+<section>
+    <div class="container">
+        <form class="row g-3" method="post" th:action="@{/create-notes}" th:object="${note}">
+            <div class="col-6">
+                <label for="title" class="form-label">Title</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{title}"
+                        id="title"
+                        placeholder="Title">
+                <p th:if="${#fields.hasErrors('title')}" class="text-danger mb-0" th:errors="*{title}"></p>
+            </div>
+            <div class="col-6 mt-auto">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            <div class="col-12">
+                <label for="content" class="form-label">Content</label>
+                <textarea
+                        type="text"
+                        rows="10"
+                        class="form-control writing"
+                        th:field="*{content}"
+                        id="content"></textarea>
+            </div>
+
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

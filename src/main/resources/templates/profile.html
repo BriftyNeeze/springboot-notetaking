@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body layout:fragment="body">
+    <section class="container" th:object="${profile}">
+        <div class="h1">
+            Profile & Settings
+        </div>
+        <div class="mb-2">
+            <div class="row mb-2">
+                <div class="col" th:text="'Id: ' + *{id}"></div>
+                <div class="col" th:text="'Username: ' + *{username}"></div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col" th:text="'First Name: ' + *{firstName}">
+<!--                    <form class="row g-3" method="post" th:action="@{/notes/{noteId}(noteId=${noteId})}" th:object="${note}">-->
+<!--                        <div class="col-6">-->
+<!--                            <label for="title" class="form-label h3">Title</label>-->
+<!--                            <input-->
+<!--                                    type="text"-->
+<!--                                    class="form-control"-->
+<!--                                    th:field="*{title}"-->
+<!--                                    id="title"-->
+<!--                                    placeholder="Title">-->
+<!--                            <p th:if="${#fields.hasErrors('title')}" class="text-danger mb-0" th:errors="*{title}"></p>-->
+<!--                        </div>-->
+<!--                    </form>-->
+                </div>
+                <div class="col" th:text="'Last Name: ' + *{lastName}"></div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col" th:text="'Created: ' + *{Created}"></div>
+                <div class="col" th:text="'Last Login: ' + *{lastLogin}"></div>
+            </div>
+
+
+            <form class="mt-5" th:action="@{/profile/{profileId}/delete (profileId=*{id})}" th:method="delete">
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </form>
+
+        </div>
+    </section>
+
+
+</body>
+</html>

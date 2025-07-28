@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Register</title>
+</head>
+<body layout:fragment="body">
+    <section>
+        <div class="container">
+            <div th:if="${param.fail}" class="alert alert alert-danger">
+                Username or email already taken
+            </div>
+
+            <div th:if="${param.signup}" class="alert alert alert-info">
+                Must have an account to create notes
+            </div>
+            <form class="row g-3" method="post" th:action="@{/register}" th:object="${profile}">
+                <div class="col-12">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{username}"
+                            id="username"
+                            placeholder="">
+                    <p th:if="${#fields.hasErrors('username')}" class="text-danger mb-0" th:errors="*{username}"></p>
+                </div>
+                <div class="col-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{firstName}"
+                            id="firstName"
+                            placeholder="John">
+                    <p th:if="${#fields.hasErrors('firstName')}" class="text-danger mb-0" th:errors="*{firstName}"></p>
+                </div>
+                <div class="col-6">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{lastName}"
+                            id="lastName"
+                            placeholder="Doe">
+                    <p th:if="${#fields.hasErrors('lastName')}" class="text-danger mb-0" th:errors="*{lastName}"></p>
+                </div>
+                <div class="col-12">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{email}"
+                            id="inputEmail"
+                            placeholder="john.doe@example.com">
+                    <p th:if="${#fields.hasErrors('email')}" class="text-danger mb-0" th:errors="*{email}"></p>
+                </div>
+                <div class="col-12">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                            id="inputPassword"
+                            placeholder="password"
+                            th:field="*{password}">
+                    <p th:if="${#fields.hasErrors('password')}" class="text-danger mb-0" th:errors="*{password}"></p>
+                </div>
+
+                <div class="col-12">
+                    <button th:href="@{/register}" type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

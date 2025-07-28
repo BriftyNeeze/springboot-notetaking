@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Notes</title>
+</head>
+<body layout:fragment="body">
+
+
+<section class="container">
+    <h1>Shared Notes</h1>
+    <div class="h2 mb-2" th:text="${profile.username}"></div>
+
+<!--    <div class="row">-->
+<!--        <form th:action="@{/notes/search}" class="col-9 form-inline my-2 my-lg-0 mb-3">-->
+<!--            <input name="query" class="form-control mr-sm-2 mb-5" type="search" placeholder="Search notes" aria-label="Search">-->
+<!--        </form>-->
+<!--        <div th:if="${param.query}" class="col-3">-->
+<!--            <a class="btn btn-primary" th:href="@{/notes}">Clear</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Title</th>
+            <th scope="col">Last Edited</th>
+            <th scope="col">Owner</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="noteShare : ${noteShares}">
+            <td><a class="ms-2 btn btn-primary" th:href="@{/notes/shared-with/{noteId}(noteId=${noteShare.note.Id})}">View</a></td>
+            <td><div class="" th:text="${noteShare.note.title}"></div></td>
+            <td><div class="" th:text="${noteShare.note.lastEdited}"></div></td>
+            <td><div class="" th:text="${noteShare.note.ownerProfile.username}"></div></td>
+            <td class="">
+                <div class="d-flex justify-content-end dropdown">
+                    <i class="bi bi-three-dots-vertical" th:id="'notes' + ${noteShare.note.id}" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu dropdown-menu-end" th:aria-labelledby="'notes' + ${noteShare.note.id}">
+                        <li><a class="dropdown-item" th:href="@{/}">More Details</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+
+</body>
+</html>

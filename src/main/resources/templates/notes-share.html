@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>View</title>
+</head>
+<body layout:fragment="body">
+<section>
+    <div class="container">
+        <form class="row g-3" method="post" th:action="@{/notes/{noteId}/share(noteId=${noteId})}" th:object="${newNoteShare}">
+            <div class="col-6">
+                <label for="username" class="form-label">Username</label>
+                <input
+                        type="text"
+                        class="form-control"
+                        id="username"
+                        th:field="*{profileUsername}"
+                        placeholder="Username">
+            </div>
+
+            <select th:field="*{permissionLevel}" class="form-select" aria-label="Default select example">
+                <option value="READ">Read</option>
+            </select>
+
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary">Share</button>
+            </div>
+        </form>
+
+
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Permission Level</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="noteShare : ${note.noteShares}">
+
+                <td><div class="" th:text="${noteShare.sharedWithProfile.username}"></div></td>
+                <td><div class="" th:text="${noteShare.permissionLevel}"></div></td>
+                <td class="">
+                    <div class="d-flex justify-content-end dropdown">
+                        <i class="bi bi-three-dots-vertical" th:id="'notes' + ${note.id}" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-end" th:aria-labelledby="'notes' + ${note.id}">
+                            <li><a class="dropdown-item" th:href="@{/}">More Details</a></li>
+                            <div class="dropdown-divider"></div>
+                            <form  th:action="@{/notes/{noteId}/{noteShareId}/remove (noteShareId=${noteShare.id}, noteId=${note.id})}" th:method="delete">
+                                <button type="submit" class="dropdown-item">Unshare</button>
+                            </form>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</section>
+</body>
+</html>

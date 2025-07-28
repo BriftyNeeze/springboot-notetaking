@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>View</title>
+</head>
+<body layout:fragment="body">
+    <section>
+        <div class="container">
+            <form class="row g-3" method="post" th:action="@{/notes/{noteId}(noteId=${noteId})}" th:object="${note}">
+                <div class="col-6">
+                    <label for="title" class="form-label h3">Title</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{title}"
+                            id="title"
+                            placeholder="Title">
+                    <p th:if="${#fields.hasErrors('title')}" class="text-danger mb-0" th:errors="*{title}"></p>
+                </div>
+
+                <div class="col-1 mt-auto">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+
+                <div class="col-1 mt-auto">
+                    <button type="button" class="btn btn-primary">Nothing</button>
+                </div>
+
+                <div class="col-12">
+                    <label for="content" class="form-label h3">Content</label>
+                    <textarea
+
+                            type="text"
+                            rows="10"
+                            class="form-control writing"
+                            th:field="*{content}"
+                            id="content">
+                    </textarea>
+
+                </div>
+
+            </form>
+        </div>
+    </section>
+</body>
+</html>
